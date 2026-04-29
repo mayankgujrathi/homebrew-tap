@@ -1,17 +1,17 @@
 class Vocoflow < Formula
   desc "Tray-first voice dictation app"
   homepage "https://github.com/mayankgujrathi/vocoflow"
-  version "0.0.2"
+  version "0.1.0"
   license "MIT"
 
   on_macos do
-    url "https://github.com/mayankgujrathi/vocoflow/releases/download/v0.0.2/vocoflow-v0.0.2-macos.tar.gz"
-    sha256 "b56e242ee4d4669f6996588aee94065f84b732b5871dc4ffed57be5a24f85aa2"
+    url "https://github.com/mayankgujrathi/vocoflow/releases/download/v0.1.0/vocoflow-v0.1.0-macos.tar.gz"
+    sha256 "0d65c01b5ca01020cbb72ebdb5d49e06edde53a6b2b035d47f566007ca79cfbd"
   end
 
   on_linux do
-    url "https://github.com/mayankgujrathi/vocoflow/releases/download/v0.0.2/vocoflow-v0.0.2-linux.AppImage"
-    sha256 "b8de0e5357a66b03a01ad7610ceeb78156235ee4ae13c6a19a279da26008ec87"
+    url "https://github.com/mayankgujrathi/vocoflow/releases/download/v0.1.0/vocoflow-v0.1.0-linux.AppImage"
+    sha256 "fa22379539e19f6ea700de2c59ffed14b57463abc5aac5b25c2ac3815d0fc8f7"
   end
 
   def install_linux_deps
@@ -94,14 +94,14 @@ class Vocoflow < Formula
   def install
     if OS.mac?
       libexec.install "Vocoflow.app"
-      bin.install_symlink libexec/"Vocoflow.app/Contents/MacOS/vocoflow" => "vocoflow"
+      (bin/"vocoflow").write_env_script libexec/"Vocoflow.app/Contents/MacOS/vocoflow"
     else
       install_linux_deps
       appimage = Dir["*.AppImage"].first
       raise "Linux AppImage not found in formula payload" if appimage.nil?
       libexec.install appimage => "vocoflow.AppImage"
       chmod 0755, libexec/"vocoflow.AppImage"
-      bin.install_symlink libexec/"vocoflow.AppImage" => "vocoflow"
+      (bin/"vocoflow").write_env_script libexec/"vocoflow.AppImage"
 
       desktop_file = buildpath/"vocoflow.desktop"
       desktop_file.write <<~DESKTOP
