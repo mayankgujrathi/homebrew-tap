@@ -6,12 +6,12 @@ class Vocoflow < Formula
 
   on_macos do
     url "https://github.com/mayankgujrathi/vocoflow/releases/download/v0.1.0/vocoflow-v0.1.0-macos.tar.gz"
-    sha256 "0d65c01b5ca01020cbb72ebdb5d49e06edde53a6b2b035d47f566007ca79cfbd"
+    sha256 "e314cb8155f3ad761e4617ce0972591a7007bfe1047d057eb46e3a9a600a0e84"
   end
 
   on_linux do
     url "https://github.com/mayankgujrathi/vocoflow/releases/download/v0.1.0/vocoflow-v0.1.0-linux.AppImage"
-    sha256 "fa22379539e19f6ea700de2c59ffed14b57463abc5aac5b25c2ac3815d0fc8f7"
+    sha256 "61cb9b5170287b140e9a9ae0bd68e426dd6fc9ef26448998b2b3ba2851d06891"
   end
 
   def install_linux_deps
