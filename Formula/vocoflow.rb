@@ -17,13 +17,13 @@ class Vocoflow < Formula
   def install
     if OS.mac?
       libexec.install "Vocoflow.app"
-      (bin/"vocoflow").write_env_script libexec/"Vocoflow.app/Contents/MacOS/vocoflow"
+      bin.install_symlink libexec/"Vocoflow.app/Contents/MacOS/vocoflow" => "vocoflow"
     else
       appimage = Dir["*.AppImage"].first
       raise "Linux AppImage not found in formula payload" if appimage.nil?
       libexec.install appimage => "vocoflow.AppImage"
       chmod 0755, libexec/"vocoflow.AppImage"
-      (bin/"vocoflow").write_env_script libexec/"vocoflow.AppImage"
+      bin.install_symlink libexec/"vocoflow.AppImage" => "vocoflow"
     end
   end
 
