@@ -42,7 +42,7 @@ class Vocoflow < Formula
         libwayland-client0 libx11-6 libxi6 libxtst6 libxrandr2 libxinerama1
         libxcursor1 libxcb1 libxcb-render0 libxcb-shape0 libxcb-xfixes0
         libxkbcommon0 libxkbcommon-x11-0 libxdo3 libudev1 libayatana-appindicator3-1
-        libfuse2 libfuse2t64
+        libfuse2 libfuse2t64 inotify-tools
       ]
 
       available = packages.select do |pkg|
@@ -59,7 +59,7 @@ class Vocoflow < Formula
         gtk3 webkit2gtk-4.1 libsoup3 atk gdk-pixbuf2 pango cairo alsa-lib
         wayland libx11 libxi libxtst libxrandr libxinerama libxcursor libxcb
         xcb-util-renderutil xcb-util xcb-util-wm xcb-util-keysyms libxkbcommon
-        libxkbcommon-x11 xdotool systemd libayatana-appindicator fuse2
+        libxkbcommon-x11 xdotool systemd libayatana-appindicator fuse2 inotify-tools
       ]
 
       available = packages.select do |pkg|
@@ -77,7 +77,7 @@ class Vocoflow < Formula
         pango cairo alsa-lib wayland libX11 libXi libXtst libXrandr libXinerama
         libXcursor libxcb xcb-util-renderutil xcb-util xcb-util-wm xcb-util-keysyms
         libxkbcommon libxkbcommon-x11 xdotool systemd-libs
-        libayatana-appindicator-gtk3 libappindicator-gtk3 fuse
+        libayatana-appindicator-gtk3 libappindicator-gtk3 fuse inotify-tools
       ]
 
       available = packages.select do |pkg|
