@@ -1,17 +1,17 @@
 class Vocoflow < Formula
   desc "Tray-first voice dictation app"
   homepage "https://github.com/mayankgujrathi/vocoflow"
-  version "0.1.1"
+  version "0.1.2"
   license "MIT"
 
   on_macos do
-    url "https://github.com/mayankgujrathi/vocoflow/releases/download/v0.1.1/vocoflow-v0.1.1-macos.tar.gz"
-    sha256 "07214de8c7ae2f3a783654a5f96f87f1a0351584c10739995d3e78d631086eca"
+    url "https://github.com/mayankgujrathi/vocoflow/releases/download/v0.1.2/vocoflow-v0.1.2-macos.tar.gz"
+    sha256 "7a353aa41b204610bb3073d5e6486959d3ad14ff664be919624fe260b0d77949"
   end
 
   on_linux do
-    url "https://github.com/mayankgujrathi/vocoflow/releases/download/v0.1.1/vocoflow-v0.1.1-linux.AppImage"
-    sha256 "7532f4fa9bd03727adf87b14f67c6be9a6744087f5e156aad474a7673ff175d1"
+    url "https://github.com/mayankgujrathi/vocoflow/releases/download/v0.1.2/vocoflow-v0.1.2-linux.AppImage"
+    sha256 "31a6c173c5dc62cd96cdaaf982b9862b78875c31318f46c0c2136b17cf7809b7"
   end
 
   def package_available?(probe_cmd)
