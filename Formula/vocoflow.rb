@@ -14,6 +14,12 @@ class Vocoflow < Formula
     sha256 "7532f4fa9bd03727adf87b14f67c6be9a6744087f5e156aad474a7673ff175d1"
   end
 
+  def package_available?(probe_cmd)
+    system "bash", "-lc", "#{probe_cmd} >/dev/null 2>&1"
+  rescue StandardError
+    false
+  end
+
   def install_linux_deps
     return unless OS.linux?
 
@@ -46,7 +52,7 @@ class Vocoflow < Formula
       ]
 
       available = packages.select do |pkg|
-        system "bash", "-lc", "apt-cache show #{pkg} >/dev/null 2>&1"
+        package_available?("apt-cache show #{pkg}")
       end
 
       if available.empty?
@@ -56,14 +62,14 @@ class Vocoflow < Formula
       end
     when :arch
       packages = %w[
-        gtk3 webkit2gtk-4.1 libsoup3 atk gdk-pixbuf2 pango cairo alsa-lib
+        gtk3 webkit2gtk-4.1 libsoup3 at-spi2-core gdk-pixbuf2 pango cairo alsa-lib
         wayland libx11 libxi libxtst libxrandr libxinerama libxcursor libxcb
         xcb-util-renderutil xcb-util xcb-util-wm xcb-util-keysyms libxkbcommon
         libxkbcommon-x11 xdotool systemd libayatana-appindicator fuse2 inotify-tools
       ]
 
       available = packages.select do |pkg|
-        system "bash", "-lc", "pacman -Si #{pkg} >/dev/null 2>&1"
+        package_available?("pacman -Si #{pkg}")
       end
 
       if available.empty?
@@ -81,7 +87,7 @@ class Vocoflow < Formula
       ]
 
       available = packages.select do |pkg|
-        system "bash", "-lc", "dnf list --available #{pkg} >/dev/null 2>&1"
+        package_available?("dnf list --available #{pkg}")
       end
 
       if available.empty?
