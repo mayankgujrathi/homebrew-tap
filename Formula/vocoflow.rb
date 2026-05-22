@@ -100,7 +100,10 @@ class Vocoflow < Formula
 
   def install
     if OS.mac?
-      libexec.install "Vocoflow.app"
+      app_bundle = Dir["*.app"].first || Dir["**/*.app"].first
+      raise "macOS app bundle (*.app) not found in formula payload" if app_bundle.nil?
+
+      libexec.install app_bundle => "Vocoflow.app"
       (bin/"vocoflow").write_env_script libexec/"Vocoflow.app/Contents/MacOS/vocoflow"
     else
       install_linux_deps
