@@ -38,7 +38,7 @@ class Vocoflow < Formula
       return
     end
 
-    opoo "Attempting Linux runtime dependency install for #{distro_family} family (best effort)."
+    opoo "Installing Linux runtime dependencies for #{distro_family} family."
 
     case distro_family
     when :debian
@@ -58,7 +58,7 @@ class Vocoflow < Formula
       if available.empty?
         opoo "No matching Debian packages found from dependency list. Continuing without auto-install."
       else
-        system "bash", "-lc", "DEBIAN_FRONTEND=noninteractive apt-get install -y #{available.join(" ")} >/dev/null 2>&1 || true"
+        system "bash", "-lc", "DEBIAN_FRONTEND=noninteractive apt-get install -y #{available.join(" ")} >/dev/null 2>&1"
       end
     when :arch
       packages = %w[
@@ -75,7 +75,7 @@ class Vocoflow < Formula
       if available.empty?
         opoo "No matching Arch packages found from dependency list. Continuing without auto-install."
       else
-        system "bash", "-lc", "pacman -S --noconfirm --needed #{available.join(" ")} >/dev/null 2>&1 || true"
+        system "bash", "-lc", "pacman -S --noconfirm --needed #{available.join(" ")} >/dev/null 2>&1"
       end
     when :fedora
       packages = %w[
@@ -93,7 +93,7 @@ class Vocoflow < Formula
       if available.empty?
         opoo "No matching Fedora packages found from dependency list. Continuing without auto-install."
       else
-        system "bash", "-lc", "dnf install -y --skip-broken #{available.join(" ")} >/dev/null 2>&1 || true"
+        system "bash", "-lc", "dnf install -y --skip-broken #{available.join(" ")} >/dev/null 2>&1"
       end
     end
   end
