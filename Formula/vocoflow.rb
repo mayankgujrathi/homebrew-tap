@@ -99,6 +99,9 @@ class Vocoflow < Formula
   end
 
   def install
+    libexec.mkpath
+    bin.mkpath
+
     if OS.mac?
       app_bundle = buildpath.glob("*.app").first || buildpath.glob("**/*.app").first
       if app_bundle
@@ -120,6 +123,8 @@ class Vocoflow < Formula
       (bin/"vocoflow").chmod 0755
     else
       install_linux_deps
+      (share/"applications").mkpath
+      (share/"icons/hicolor/256x256/apps").mkpath
       appimage = buildpath.glob("*.AppImage").first || buildpath.glob("**/*.AppImage").first
       raise "Linux AppImage not found in formula payload" if appimage.nil?
       cp appimage, libexec/"vocoflow.AppImage"
