@@ -101,13 +101,22 @@ class Vocoflow < Formula
   def install
     if OS.mac?
       app_bundle = buildpath.glob("*.app").first || buildpath.glob("**/*.app").first
-      raise "macOS app bundle (*.app) not found in formula payload" if app_bundle.nil?
+      if app_bundle
+        cp_r app_bundle, libexec/"Vocoflow.app"
+        mac_exe = libexec/"Vocoflow.app/Contents/MacOS/vocoflow"
+      else
+        fallback_exe = buildpath.glob("**/vocoflow").find { |p| p.file? && p.executable? }
+        raise "macOS app bundle (*.app) or fallback vocoflow executable not found in formula payload" if fallback_exe.nil?
 
-      cp_r app_bundle, libexec/"Vocoflow.app"
-      (bin/"vocoflow").write_env_script libexec/"Vocoflow.app/Contents/MacOS/vocoflow"
+        cp fallback_exe, libexec/"vocoflow"
+        (libexec/"vocoflow").chmod 0755
+        mac_exe = libexec/"vocoflow"
+      end
+
+      (bin/"vocoflow").write_env_script mac_exe
     else
       install_linux_deps
-      appimage = Dir["*.AppImage"].first
+      appimage = buildpath.glob("*.AppImage").first || buildpath.glob("**/*.AppImage").first
       raise "Linux AppImage not found in formula payload" if appimage.nil?
       cp appimage, libexec/"vocoflow.AppImage"
       (libexec/"vocoflow.AppImage").chmod 0755
