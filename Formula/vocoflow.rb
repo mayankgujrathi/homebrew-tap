@@ -103,13 +103,13 @@ class Vocoflow < Formula
       app_bundle = buildpath.glob("*.app").first || buildpath.glob("**/*.app").first
       raise "macOS app bundle (*.app) not found in formula payload" if app_bundle.nil?
 
-      libexec.install app_bundle => "Vocoflow.app"
+      cp_r app_bundle, libexec/"Vocoflow.app"
       (bin/"vocoflow").write_env_script libexec/"Vocoflow.app/Contents/MacOS/vocoflow"
     else
       install_linux_deps
       appimage = Dir["*.AppImage"].first
       raise "Linux AppImage not found in formula payload" if appimage.nil?
-      libexec.install appimage => "vocoflow.AppImage"
+      cp appimage, libexec/"vocoflow.AppImage"
       (libexec/"vocoflow.AppImage").chmod 0755
       (bin/"vocoflow").write_env_script libexec/"vocoflow.AppImage"
 
@@ -128,7 +128,7 @@ class Vocoflow < Formula
       system "bash", "-lc", "cd #{buildpath} && #{libexec}/vocoflow.AppImage --appimage-extract vocoflow.png >/dev/null 2>&1 || true"
       extracted_icon = buildpath/"squashfs-root/vocoflow.png"
       if extracted_icon.exist?
-        (share/"icons/hicolor/256x256/apps").install extracted_icon => "vocoflow.png"
+        cp extracted_icon, share/"icons/hicolor/256x256/apps/vocoflow.png"
       else
         opoo "Could not extract vocoflow icon from AppImage; desktop entry will use system fallback icon."
       end
