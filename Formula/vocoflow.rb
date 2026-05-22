@@ -100,7 +100,7 @@ class Vocoflow < Formula
 
   def install
     if OS.mac?
-      app_bundle = Dir["*.app"].first || Dir["**/*.app"].first
+      app_bundle = buildpath.glob("*.app").first || buildpath.glob("**/*.app").first
       raise "macOS app bundle (*.app) not found in formula payload" if app_bundle.nil?
 
       libexec.install app_bundle => "Vocoflow.app"
