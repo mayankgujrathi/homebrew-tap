@@ -107,7 +107,7 @@ class Vocoflow < Formula
       appimage = Dir["*.AppImage"].first
       raise "Linux AppImage not found in formula payload" if appimage.nil?
       libexec.install appimage => "vocoflow.AppImage"
-      chmod 0755, libexec/"vocoflow.AppImage"
+      (libexec/"vocoflow.AppImage").chmod 0755
       (bin/"vocoflow").write_env_script libexec/"vocoflow.AppImage"
 
       desktop_file = buildpath/"vocoflow.desktop"
