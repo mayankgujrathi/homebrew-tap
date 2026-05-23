@@ -162,7 +162,7 @@ class Vocoflow < Formula
 
   test do
     if OS.mac?
-      system "#{bin}/vocoflow", "--health-check"
+      system "#{libexec}/Vocoflow.app/Contents/MacOS/vocoflow", "--health-check"
     else
       rm_rf testpath/"squashfs-root"
       system "#{libexec}/vocoflow.AppImage", "--appimage-extract"
